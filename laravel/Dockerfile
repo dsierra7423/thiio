@@ -13,6 +13,9 @@ WORKDIR /var/www
 # Copy the composer files
 COPY . composer.json ./
 
+RUN mkdir -p ./database/seeders
+RUN mkdir -p ./database/factories
+
 # Install dependencies
 RUN composer install
 
