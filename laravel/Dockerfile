@@ -2,7 +2,11 @@
 FROM php:8.1-fpm-alpine
 
 # Install necessary extensions
-RUN docker-php-ext-install pdo pdo_mysql
+#RUN docker-php-ext-install pdo pdo_mysql
+
+# Install PHP extensions and other dependencies
+RUN docker-php-ext-install pdo pdo_mysql \
+    && apk add --no-cache bash git openssh
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -12,6 +16,7 @@ WORKDIR /var/www
 
 # Copy the composer files
 COPY . composer.json ./
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN mkdir -p ./database/seeders
 RUN mkdir -p ./database/factories
