@@ -24,6 +24,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Copy composer.lock and composer.json
 COPY composer.json ./
+RUN mkdir -p ./database/seeders
+RUN mkdir -p ./database/factories
 
 # Install project dependencies
 RUN composer install
