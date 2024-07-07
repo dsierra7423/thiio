@@ -33,12 +33,6 @@ RUN composer install
 # Copy existing application directory contents
 COPY . .
 
-# Generate key for Laravel application
-RUN php artisan key:generate
-
-# Optimize Laravel application
-RUN php artisan optimize
-
 # Set permissions for Laravel storage and cache folders
 RUN chown -R www-data:www-data \
     storage \
