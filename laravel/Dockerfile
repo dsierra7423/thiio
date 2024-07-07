@@ -23,9 +23,7 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copy composer.lock and composer.json
-COPY composer.json ./
-RUN mkdir -p ./database/seeders
-RUN mkdir -p ./database/factories
+COPY composer.lock composer.json ./
 
 # Install project dependencies
 RUN composer install --no-scripts --no-autoloader
@@ -47,3 +45,4 @@ RUN chown -R www-data:www-data \
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
+
