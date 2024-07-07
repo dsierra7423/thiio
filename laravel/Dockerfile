@@ -1,39 +1,49 @@
-# laravel/Dockerfile
+# Use an official PHP runtime as a parent image
 FROM php:8.1-fpm-alpine
 
-# Install necessary extensions
-#RUN docker-php-ext-install pdo pdo_mysql
+# Set the working directory
+WORKDIR /var/www/html
 
-# Install PHP extensions and other dependencies
-RUN docker-php-ext-install pdo pdo_mysql \
-    && apk add --no-cache bash git openssh
+# Install system dependencies
+RUN apk update && apk add --no-cache \
+    git \
+    curl \
+    libpng-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    libzip-dev \
+    oniguruma-dev \
+    openssl-dev
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set working directory
-WORKDIR /var/www
-
-# Copy the composer files
-COPY . composer.json ./
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
+# Copy composer.lock and composer.json
+COPY composer.json ./
 RUN mkdir -p ./database/seeders
 RUN mkdir -p ./database/factories
 
-# Generate the artisan script (ensure it exists)
-RUN php -r "file_exists('artisan') || copy('vendor/laravel/framework/src/Illuminate/Foundation/Console/stubs/artisan', 'artisan');"
+# Install project dependencies
+RUN composer install --no-scripts --no-autoloader
 
-# Install dependencies and optimize autoloader
-RUN composer install --no-interaction --no-plugins --no-scripts --prefer-dist \
-    && php artisan optimize
-
-
-# Copy the rest of the application code
+# Copy existing application directory contents
 COPY . .
 
-# Expose port
-EXPOSE 9000
+# Generate key for Laravel application
+RUN php artisan key:generate
 
-# Entry point to run migrations and start PHP-FPM
-CMD php artisan migrate --force && php artisan db:seed --force && php-fpm
+# Optimize Laravel application
+RUN php artisan optimize
+
+# Set permissions for Laravel storage and cache folders
+RUN chown -R www-data:www-data \
+    storage \
+    bootstrap/cache
+
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
