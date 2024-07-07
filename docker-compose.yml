@@ -1,7 +1,6 @@
 version: '3'
 services:
   
-  #PHP Service
   app:
     build:
       context: .
@@ -19,8 +18,6 @@ services:
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
-
-  #Nginx Service
   webserver:
     image: nginx:alpine
     container_name: webserver
@@ -35,7 +32,6 @@ services:
     networks:
       - app-network
 
-  #MySQL Service
   db:
     image: mysql:5.7.22
     container_name: db
@@ -53,12 +49,17 @@ services:
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
+      
+  random-http:
+    image: hashicorp/http-echo
+    command: ["-text=Hello from random http service!"]
+    profiles:
+      - random
 
-#Docker Networks
 networks:
   app-network:
     driver: bridge
-#Volumes
+
 volumes:
   dbdata:
     driver: local
