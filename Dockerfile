@@ -41,10 +41,9 @@ RUN apk --no-cache add \
     curl \
     oniguruma-dev \
     libzip-dev \
-    gd-dev
-
-
-
+    gd-dev \
+    shadow \
+    bash
 
 # Clear cache
 #RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -55,17 +54,27 @@ RUN docker-php-ext-configure gd --with-external-gd
 RUN docker-php-ext-install gd
 
 # Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install pdo_mysql zip exif pcntl gd intl
+
 
 # Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+#RUN groupadd -g 1000 www
+#RUN useradd -u 1000 -ms /bin/bash -g www www
+
+# Create the www group and user
+RUN addgroup -g 1000 www && \
+    adduser -u 1000 -D -S -G www -s /bin/bash www
 
 COPY . /var/www
 COPY --chown=www:www . /var/www
 
-RUN composer install
-RUN php artisan key:generate
+RUN composer install && \
+    php artisan key:generate
 
 # Change current user to www
 USER www
