@@ -47,13 +47,9 @@ git clone https://github.com/dsierra7423/thiio.git
 cd thiio
 ```
 
-
 5. Configure DNS .
 
 ```sh
-vi /etc/hosts
-
-# Add  127.0.0.1 devops.test
-
+sudo su
+sudo echo "127.0.0.1 devops.test" >> /etc/hosts
 ```
-
