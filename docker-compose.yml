@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      platform: linux/amd64
     environment:
       - DB_HOST=mysql
       - DB_DATABASE=laravel
@@ -18,7 +17,6 @@ services:
 
   mysql:
     image: mysql:5.7
-    platform: linux/amd64
     environment:
       MYSQL_DATABASE: laravel
       MYSQL_ROOT_PASSWORD: root
@@ -27,7 +25,6 @@ services:
 
   nginx:
     image: nginx:alpine
-    platform: linux/amd64
     depends_on:
       - app
     volumes:
@@ -38,7 +35,6 @@ services:
   random_service:
     build:
       context: ./random-http
-      platform: linux/amd64
     profiles:
       - random
 
