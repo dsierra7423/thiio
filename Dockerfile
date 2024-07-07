@@ -28,6 +28,7 @@ RUN apk --no-cache add \
     gd-dev \
     shadow \
     bash \
+    icu-dev \
     mysql-client
 
 
