@@ -50,6 +50,7 @@ cd thiio
 5. Configure DNS .
 
 ```sh
-sudo su
-sudo echo "127.0.0.1 devops.test" >> /etc/hosts
+docker-compose up -d
 ```
+
+sudo echo "127.0.0.1 devops.test" >> /etc/hosts

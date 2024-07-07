@@ -1,5 +1,7 @@
 FROM php:8.1-fpm-alpine
 
+
+
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
 
@@ -7,23 +9,45 @@ COPY composer.lock composer.json /var/www/
 WORKDIR /var/www
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
+#3RUN apt-get update && apt-get install -y \
+ #   build-essential \
+ #   libpng-dev \
+ #   libjpeg62-turbo-dev \
+ #   libfreetype6-dev \
+ #   locales \
+ #   zip \
+ #   jpegoptim optipng pngquant gifsicle \
+ #   vim \
+ #   unzip \
+ #   git \
+ #   curl \
+ #   libonig-dev \
+ #   libzip-dev \
+ #   libgd-dev
+
+RUN apk --no-cache add \
+    build-base \
     libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    locales \
+    libjpeg-turbo-dev \
+    freetype-dev \
     zip \
-    jpegoptim optipng pngquant gifsicle \
+    jpegoptim \
+    optipng \
+    pngquant \
+    gifsicle \
     vim \
     unzip \
     git \
     curl \
-    libonig-dev \
+    oniguruma-dev \
     libzip-dev \
-    libgd-dev
+    gd-dev
+
+
+
+
 # Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+#RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
