@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   app:
-    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile
+      platform: linux/amd64
     environment:
       - DB_HOST=mysql
       - DB_DATABASE=laravel
@@ -36,9 +36,9 @@ services:
       - "80:80"
 
   random_service:
-    platform: linux/amd64
     build:
       context: ./random-http
+      platform: linux/amd64
     profiles:
       - random
 
