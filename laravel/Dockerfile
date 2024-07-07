@@ -16,8 +16,12 @@ COPY . composer.json ./
 RUN mkdir -p ./database/seeders
 RUN mkdir -p ./database/factories
 
+# Generate the artisan script (ensure it exists)
+RUN php artisan optimize
+
 # Install dependencies
-RUN composer install
+RUN composer install --no-interaction --no-plugins --no-scripts --prefer-dist
+
 
 # Copy the rest of the application code
 COPY . .
