@@ -10,11 +10,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy the application code
-COPY . .
+# Copy the composer files
+COPY composer.json composer.lock ./
 
 # Install dependencies
 RUN composer install
+
+# Copy the rest of the application code
+COPY . .
 
 # Expose port
 EXPOSE 9000
