@@ -34,6 +34,8 @@ sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-c
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose version
 
-
 # INSTALL GIT
 sudo dnf install git -y
+
+# Add the following entry to your /etc/hosts file.
+127.0.0.1 devops.test
