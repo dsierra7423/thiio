@@ -22,10 +22,11 @@ RUN mkdir -p ./database/seeders
 RUN mkdir -p ./database/factories
 
 # Generate the artisan script (ensure it exists)
-RUN php artisan optimize
+RUN php -r "file_exists('artisan') || copy('vendor/laravel/framework/src/Illuminate/Foundation/Console/stubs/artisan', 'artisan');"
 
-# Install dependencies
-RUN composer install --no-interaction --no-plugins --no-scripts --prefer-dist
+# Install dependencies and optimize autoloader
+RUN composer install --no-interaction --no-plugins --no-scripts --prefer-dist \
+    && php artisan optimize
 
 
 # Copy the rest of the application code
