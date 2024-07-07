@@ -8,34 +8,52 @@ This environment includes:
 
 ## Prerequisites
 
+- EC2 Instance Amazon LInux 2023
 - Docker
 - Docker Compose
 
-## Setup
+## Install
 
-1. Clone the repository.
+
+1. Docker on Amazon Linux 2023.
 
 ```sh
-git clone <repository_url>
-cd <repository_directory>
-
-
-
-# INSTALL DOCKER
 sudo yum update -y
 sudo yum install docker
 sudo service docker start
 sudo usermod -a -G docker ec2-user
 #Restart session 
 docker info
+```
 
-# INSTALL DOCKER-COMPOSE
+2. Docker Compose on Amazon Linux 2023.
+
+```sh
 sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose version
+```
 
-# INSTALL GIT
+3. Install Git .
+
+```sh
 sudo dnf install git -y
+```
 
-# Add the following entry to your /etc/hosts file.
-127.0.0.1 devops.test
+4. Clone repository .
+
+```sh
+git clone https://github.com/dsierra7423/thiio.git
+cd thiio
+```
+
+
+5. Configure DNS .
+
+```sh
+vi /etc/hosts
+
+# Add  127.0.0.1 devops.test
+
+```
+
