@@ -23,10 +23,10 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copy composer.lock and composer.json
-COPY composer.lock composer.json ./
+COPY composer.json ./
 
 # Install project dependencies
-RUN composer install --no-scripts --no-autoloader
+RUN composer install
 
 # Copy existing application directory contents
 COPY . .
