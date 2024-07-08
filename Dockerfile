@@ -38,8 +38,8 @@ WORKDIR "/var/www"
 #RUN chmod +x ./docker-composer.sh 
 #RUN ./docker-composer.sh
 
-RUN composer install && \
-    php artisan key:generate
+#RUN composer install && \
+#    php artisan key:generate
 
 # Create the www group and user
 RUN addgroup -g 1000 www && \
@@ -66,4 +66,4 @@ USER www
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
-CMD ["php-fpm"]
+CMD ["composer install" , "php artisan key:generate" ,"php-fpm"]
