@@ -84,6 +84,6 @@ Record Type A  devops.test to IP
 
 - http://devops.test
 - http://devops.test/thiio
-- http://ip
-- http://ip/thiio
+- http://ec2-public-ip
+- http://ec2-public-ip/thiio
 
