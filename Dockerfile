@@ -45,10 +45,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 
 # Copy entrypoint script
-COPY ./docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+#COPY ./docker-entrypoint.sh /usr/local/bin/
+#RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 # Run the entrypoint script
-ENTRYPOINT ["docker-entrypoint.sh"]
+#ENTRYPOINT ["docker-entrypoint.sh"]
+
+RUN ./docker-entrypoint.sh
 
 COPY --chown=www:www . /var/www
 
