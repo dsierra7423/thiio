@@ -50,9 +50,9 @@ COPY . /var/www
 #ENTRYPOINT ["docker-entrypoint.sh"]
 
 RUN chmod +x ./docker-composer.sh
-RUN ./docker-composer.sh
 
 COPY --chown=www:www . /var/www
+RUN ./docker-composer.sh
 
 # Change current user to www
 USER www
