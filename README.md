@@ -11,7 +11,7 @@ This environment includes:
 - EC2 Instance Amazon LInux 2023
 - Docker
 - Docker Compose
-- Configure seguritygroup to accept 80 port
+- Configure segurity group to accept 80 port
 
 ## Setup
 
@@ -52,12 +52,12 @@ cd thiio
 
 1. Modify the .env file whith the database configuration parametets Example:.
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laravel
-DB_USERNAME=root
-DB_PASSWORD=
+- DB_CONNECTION=mysql
+- DB_HOST=127.0.0.1
+- DB_PORT=3306
+- DB_DATABASE=laravel
+- DB_USERNAME=root
+- DB_PASSWORD=
 
 
 ## Run .
@@ -69,7 +69,7 @@ docker-compose --profile random up
 ```
 
 
-# Configuring  devops.test
+# Configuring devops.test
 
 1.- If you run on local host you need to modify /etc/host
 ```sh
@@ -78,3 +78,13 @@ sudo echo "127.0.0.1 devops.test" >> /etc/hosts
 
 2.- If you run on EC2 Configure Route53 to create 
 Record Type A  devops.test to IP  
+
+
+# EndPoints
+
+a) URL: http://devops.test
+b) URL: htpp://devops.test/thiio
+c) URL: http://ip
+d) URL: http://ip/thiio
+
+
