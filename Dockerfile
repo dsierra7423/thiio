@@ -51,9 +51,9 @@ COPY . /var/www
 
 RUN chmod +x ./docker-composer.sh && \
     chown www:www ./docker-composer.sh
+RUN ./docker-composer.sh
 
 COPY --chown=www:www . /var/www
-RUN ./docker-composer.sh
 
 # Change current user to www
 USER www
