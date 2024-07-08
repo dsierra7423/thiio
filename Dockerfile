@@ -37,7 +37,6 @@ COPY . /var/www
 RUN addgroup -g 1000 www && \
     adduser -u 1000 -D -S -G www -s /bin/bash www
 
-RUN php artisan key:generate
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
@@ -52,7 +51,7 @@ COPY . /var/www
 
 # Install PHP dependencies
 RUN composer install --no-interaction --no-scripts --prefer-dist
-#RUN php artisan key:generate
+RUN php artisan key:generate
 
 COPY --chown=www:www . /var/www
 
