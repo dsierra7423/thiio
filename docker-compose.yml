@@ -49,12 +49,7 @@ services:
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
-      
-  random-http:
-    image: hashicorp/http-echo
-    command: ["-text=Hello from random http service!"]
-    profiles:
-      - random
+
 
 networks:
   app-network:
