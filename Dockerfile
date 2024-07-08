@@ -45,7 +45,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY . /var/www
 COPY --chown=www:www . /var/www
-RUN pwd
+
 RUN composer install && \
     php artisan key:generate
 # Copy entrypoint script
