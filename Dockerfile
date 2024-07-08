@@ -33,8 +33,13 @@ RUN apk --no-cache add \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 
-RUN chmod +x ./docker-composer.sh 
-RUN ./docker-composer.sh
+WORKDIR "/var/www"
+
+#RUN chmod +x ./docker-composer.sh 
+#RUN ./docker-composer.sh
+
+RUN composer install && \
+    artisan key:generate
 
 # Create the www group and user
 RUN addgroup -g 1000 www && \
