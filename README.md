@@ -68,4 +68,10 @@ DB_PASSWORD=
 docker-compose --profile random up
 ```
 
+
+# Configuring DNS Domain
+
+1.- If you run on local host you need to modify /etc/host
+```sh
 sudo echo "127.0.0.1 devops.test" >> /etc/hosts
+```

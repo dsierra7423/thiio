@@ -39,6 +39,10 @@ WORKDIR "/var/www"
 RUN addgroup -g 1000 www && \
     adduser -u 1000 -D -S -G www -s /bin/bash www
 
+COPY ./docker-composer.sh /var/www
+RUN chmod +x ./docker-composer.sh
+RUN ./docker-compose.sh
+
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install pdo_mysql zip exif pcntl gd intl
@@ -56,9 +60,7 @@ COPY . /var/www
 #RUN php artisan key:generate
 
 
-COPY ./docker-composer.sh /var/www
-RUN chmod +x ./docker-composer.sh
-RUN ./docker-compose.sh
+
 
 COPY --chown=www:www . /var/www
 
