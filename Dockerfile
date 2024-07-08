@@ -52,6 +52,8 @@ COPY . /var/www
 RUN chmod +x ./docker-composer.sh
 RUN ./docker-composer.sh
 
+RUN php artisan key:generate
+
 COPY --chown=www:www . /var/www
 
 # Change current user to www
