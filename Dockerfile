@@ -46,7 +46,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 COPY --chown=www:www . /var/www
 
-RUN composer install
+RUN composer installs
 RUN php artisan key:generate
 # Copy entrypoint script
 COPY ./docker-entrypoint.sh /usr/local/bin/
@@ -56,6 +56,7 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Change current user to www
 USER www
+
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
