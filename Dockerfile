@@ -55,8 +55,8 @@ COPY . /var/www
 #RUN composer install --no-interaction --no-scripts --prefer-dist
 #RUN php artisan key:generate
 
-RUN chmod +x /var/www/docker-compose.sh
-RUN /var/www/docker-compose.sh
+RUN chmod +x ./docker-composer.sh
+RUN ./docker-compose.sh
 
 COPY --chown=www:www . /var/www
 
