@@ -51,7 +51,6 @@ COPY . /var/www
 
 # Install PHP dependencies
 RUN composer install --no-interaction --no-scripts --prefer-dist
-RUN php artisan key:generate
 
 COPY --chown=www:www . /var/www
 
