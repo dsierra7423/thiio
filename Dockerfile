@@ -39,7 +39,7 @@ WORKDIR "/var/www"
 #RUN ./docker-composer.sh
 
 RUN composer install && \
-    artisan key:generate
+    php artisan key:generate
 
 # Create the www group and user
 RUN addgroup -g 1000 www && \
