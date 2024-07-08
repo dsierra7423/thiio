@@ -1,5 +1,8 @@
 #!/bin/sh
 
+composer install 
+php artisan key:generate
+
 # Wait for MySQL to be ready
 while ! mysqladmin ping -h db --silent; do
     echo "Waiting for database connection..."
