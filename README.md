@@ -11,6 +11,7 @@ This environment includes:
 - EC2 Instance Amazon LInux 2023
 - Docker
 - Docker Compose
+- Configure seguritygroup to accept 80 port
 
 ## Install
 
@@ -47,10 +48,12 @@ git clone https://github.com/dsierra7423/thiio.git
 cd thiio
 ```
 
-5. Configure DNS .
+## Install
+
+1. Run the Docker Compose service .
 
 ```sh
-docker-compose up -d
+docker-compose --profile random up
 ```
 
 sudo echo "127.0.0.1 devops.test" >> /etc/hosts
