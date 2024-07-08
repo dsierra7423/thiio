@@ -82,9 +82,8 @@ Record Type A  devops.test to IP
 
 # EndPoints
 
-a) URL: http://devops.test
-b) URL: htpp://devops.test/thiio
-c) URL: http://ip
-d) URL: http://ip/thiio
-
+- http://devops.test
+- http://devops.test/thiio
+- http://ip
+- http://ip/thiio
 
