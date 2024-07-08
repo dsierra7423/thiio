@@ -51,8 +51,11 @@ COPY . /var/www
 #RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 #ENTRYPOINT ["docker-entrypoint.sh"]
 
-RUN chmod +x /var/www/docker-composer.sh 
-RUN /var/www/docker-composer.sh
+# Install PHP dependencies
+RUN composer install --no-interaction --no-scripts --prefer-dist
+
+# Generate the application key
+RUN php artisan key:generate
 
 COPY --chown=www:www . /var/www
 
