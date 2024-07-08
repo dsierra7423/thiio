@@ -49,7 +49,8 @@ COPY . /var/www
 #RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 #ENTRYPOINT ["docker-entrypoint.sh"]
 
-RUN chmod +x ./docker-composer.sh
+RUN chmod +x ./docker-composer.sh && \
+    chown www:www ./docker-composer.sh
 
 COPY --chown=www:www . /var/www
 RUN ./docker-composer.sh
