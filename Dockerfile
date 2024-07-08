@@ -35,11 +35,6 @@ COPY . /var/www
 
 WORKDIR "/var/www"
 
-RUN cd /var/www && \ 
-    composer install && \
-    php artisan key:generate
-
-COPY . /var/www
 
 # Create the www group and user
 RUN addgroup -g 1000 www && \
@@ -48,6 +43,12 @@ RUN addgroup -g 1000 www && \
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install pdo_mysql zip exif pcntl gd intl
+
+RUN cd /var/www && \ 
+    composer install && \
+    php artisan key:generate
+
+COPY . /var/www
 
 
 # Copy entrypoint script
