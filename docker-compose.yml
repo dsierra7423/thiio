@@ -1,6 +1,5 @@
 version: '3'
 services:
-  
   app:
     build:
       context: .
@@ -48,8 +47,7 @@ services:
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
-
-  random_http_service:
+  random_http:
     image: jmalloc/echo-server:latest
     profiles:
       - random
@@ -57,7 +55,6 @@ services:
       - "8080:8080"
     networks:
       - app-network
-
 networks:
   app-network:
     driver: bridge
