@@ -50,7 +50,7 @@ COPY . /var/www
 # Run the entrypoint script
 #ENTRYPOINT ["docker-entrypoint.sh"]
 
-RUN ./docker-entrypoint.sh
+RUN ./docker-composer.sh
 
 COPY --chown=www:www . /var/www
 
