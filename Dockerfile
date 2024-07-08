@@ -35,7 +35,6 @@ COPY . /var/www
 
 WORKDIR "/var/www"
 
-
 # Create the www group and user
 RUN addgroup -g 1000 www && \
     adduser -u 1000 -D -S -G www -s /bin/bash www
@@ -43,10 +42,6 @@ RUN addgroup -g 1000 www && \
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install pdo_mysql zip exif pcntl gd intl
-
-RUN cd /var/www && \ 
-    composer install && \
-    php artisan key:generate
 
 COPY . /var/www
 
@@ -56,9 +51,8 @@ COPY . /var/www
 #RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 #ENTRYPOINT ["docker-entrypoint.sh"]
 
-#RUN chmod +x ./docker-composer.sh && \
-#    chown www:www ./docker-composer.sh
-#RUN ./docker-composer.sh
+RUN chmod +x ./docker-composer.sh 
+RUN ./docker-composer.sh
 
 COPY --chown=www:www . /var/www
 

@@ -6,14 +6,14 @@ This environment includes:
 - MySQL
 - Random HTTP Docker Image
 
-## Prerequisites
+## Environment
 
 - EC2 Instance Amazon LInux 2023
 - Docker
 - Docker Compose
 - Configure seguritygroup to accept 80 port
 
-## Install
+## Setup
 
 
 1. Docker on Amazon Linux 2023.
@@ -48,7 +48,19 @@ git clone https://github.com/dsierra7423/thiio.git
 cd thiio
 ```
 
-## Install
+# Database configuration
+
+1. Modify the .env file whith the database configuration parametets Example:.
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+
+
+## Run .
 
 1. Run the Docker Compose service .
 
