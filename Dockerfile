@@ -44,9 +44,6 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 
-RUN cd /var/www && \ 
-    composer install && \
-    php artisan key:generate
 
 # Copy entrypoint script
 COPY ./docker-entrypoint.sh /usr/local/bin/
@@ -56,10 +53,11 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 COPY --chown=www:www . /var/www
 
-
 # Change current user to www
 USER www
 
+RUN composer install && \
+    php artisan key:generate
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
