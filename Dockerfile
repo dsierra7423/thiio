@@ -33,15 +33,11 @@ RUN apk --no-cache add \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 
-WORKDIR "/var/www"
-
 # Create the www group and user
 RUN addgroup -g 1000 www && \
     adduser -u 1000 -D -S -G www -s /bin/bash www
 
-COPY ./docker-composer.sh /var/www
-RUN chmod +x ./docker-composer.sh
-RUN ./docker-compose.sh
+RUN php artisan key:generate
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
@@ -49,18 +45,14 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
 
 COPY . /var/www
 
-
 # Copy entrypoint script
 #COPY ./docker-entrypoint.sh /usr/local/bin/
 #RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 #ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Install PHP dependencies
-#RUN composer install --no-interaction --no-scripts --prefer-dist
+RUN composer install --no-interaction --no-scripts --prefer-dist
 #RUN php artisan key:generate
-
-
-
 
 COPY --chown=www:www . /var/www
 
