@@ -17,6 +17,7 @@ services:
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
+
   webserver:
     image: nginx:alpine
     container_name: webserver
@@ -30,6 +31,7 @@ services:
       - ./nginx/:/etc/nginx/conf.d/
     networks:
       - app-network
+
   db:
     image: mysql:5.7.22
     container_name: db
@@ -47,6 +49,7 @@ services:
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
+
   random_http:
     image: jmalloc/echo-server:latest
     profiles:
@@ -55,6 +58,7 @@ services:
       - "8080:8080"
     networks:
       - app-network
+
 networks:
   app-network:
     driver: bridge
