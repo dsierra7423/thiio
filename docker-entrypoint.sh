@@ -1,10 +1,10 @@
 #!/bin/sh
 
-DB_HOST=${DB_HOST:-localhost}
-DB_PORT=${DB_PORT:-3306}
-DB_USERNAME=${DB_USERNAME:-root}
-DB_PASSWORD=${DB_PASSWORD:-password}
-DB_DATABASE=${DB_DATABASE:-laravel}
+DB_HOST=db
+DB_PORT=${DB_PORT:3306}
+DB_USERNAME=${DB_USERNAME:root}
+DB_PASSWORD=${DB_PASSWORD:password}
+DB_DATABASE=${DB_DATABASE:laravel}
 
 
 # Wait for MySQL to be ready
