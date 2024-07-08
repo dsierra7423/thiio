@@ -69,9 +69,12 @@ docker-compose --profile random up
 ```
 
 
-# Configuring DNS Domain
+# Configuring  devops.test
 
 1.- If you run on local host you need to modify /etc/host
 ```sh
 sudo echo "127.0.0.1 devops.test" >> /etc/hosts
 ```
+
+2.- If you run on EC2 Configure Route53 to create 
+Record Type A  devops.test to IP  
